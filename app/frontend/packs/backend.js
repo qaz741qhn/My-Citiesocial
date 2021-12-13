@@ -14,7 +14,4 @@ ActiveStorage.start()
 import "controllers";
 
 import "styles/shared";
-import "styles/frontend";
-
-import "scripts/shared";
-import "scripts/frontend";
+import "styles/backend";
