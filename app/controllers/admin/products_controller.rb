@@ -1,9 +1,9 @@
 class Admin::ProductsController < Admin::BaseController
 
-  before_action :set_product, only: [:edit, :update]
+  before_action :set_product, only: [:edit, :update, :destroy]
 
   def index
-    @products = Product.all
+    @products = Product.all.includes(:vendor).page params[:page]
   end
 
   def new
@@ -34,6 +34,12 @@ class Admin::ProductsController < Admin::BaseController
     end
   end
 
+  def destroy
+    @product.update(deleted_at: Time.now)
+    flash[:notice] = "已刪除商品"
+    redirect_to admin_products_path
+  end
+
   private
 
   def product_params
@@ -41,7 +47,7 @@ class Admin::ProductsController < Admin::BaseController
   end
 
   def set_product
-    @product = Product.find(params[:id])
+    @product = Product.friendly.find(params[:id])
   end
 
 end

@@ -1,5 +1,7 @@
 class Product < ApplicationRecord
   include CodeGenerator
+  paginates_per 5
+  acts_as_paranoid
 
   belongs_to :vendor
   validates :code, uniqueness: true
