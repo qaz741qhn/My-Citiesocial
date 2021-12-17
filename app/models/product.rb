@@ -3,6 +3,8 @@ class Product < ApplicationRecord
   paginates_per 5
   acts_as_paranoid
 
+  has_rich_text :description
+
   belongs_to :vendor
   validates :code, uniqueness: true
   validates :name, presence: true

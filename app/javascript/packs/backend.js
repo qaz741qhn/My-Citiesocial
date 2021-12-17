@@ -11,6 +11,11 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
+
+//enable action text
+import "trix";
+import "@rails/actiontext";
+
 import "controllers";
 
 import "styles/shared";
