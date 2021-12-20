@@ -3,11 +3,12 @@ class Admin::ProductsController < Admin::BaseController
   before_action :set_product, only: [:edit, :update, :destroy]
 
   def index
-    @products = Product.all.includes(:vendor).page params[:page]
+    @products = Product.all.order(created_at: :desc).includes(:vendor).page params[:page]
   end
 
   def new
     @product = Product.new
+    @product.skus.build
   end
 
   def create
@@ -43,7 +44,7 @@ class Admin::ProductsController < Admin::BaseController
   private
 
   def product_params
-    params.require(:product).permit(:name, :vendor_id, :list_price, :sell_price, :on_sell, :description)
+    params.require(:product).permit(:name, :vendor_id, :list_price, :sell_price, :on_sell, :description, skus_attributes: [:id, :spec, :quantity, :_destroy])
   end
 
   def set_product
