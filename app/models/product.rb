@@ -4,8 +4,10 @@ class Product < ApplicationRecord
   acts_as_paranoid
 
   has_rich_text :description
+  has_one_attached :cover_image
 
   belongs_to :vendor
+  belongs_to :category, optional: true
   has_many :skus
   validates :code, uniqueness: true
   validates :name, presence: true

@@ -5,6 +5,7 @@
     <tr>
       <th>商品名稱</th>
       <th>廠商</th>
+      <th>分類</th>
       <th>價格</th>
       <th>銷售狀態</th>
       <th></th>
@@ -15,6 +16,7 @@
       <tr>
         <td><%= link_to "#{product.name} [商品編號：#{product.code}]", edit_admin_product_path(product) %></td>
         <td><%= product.vendor.title %></td>
+        <td><%= product.category.name if product.category %></td>
         <td><%= product.list_price %> / <%= product.sell_price %></td>
         <td><%= product.on_sell %></td>
         <td>
