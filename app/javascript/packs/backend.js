@@ -20,3 +20,6 @@ import "controllers";
 
 import "styles/shared";
 import "styles/backend";
+
+import "scripts/shared";
+import "scripts/backend";
