@@ -19,8 +19,9 @@ RSpec.describe Cart, type: :model do
     it "商品可放入購物車，也可拿出來" do
       cart = Cart.new
 
-      v1 = Vendor.create(title: "v1")
-      p1 = Product.create(name: "aa", list_price: 20, sell_price: 10, vendor: v1)
+      # v1 = Vendor.create(title: "v1")
+      # p1 = Product.create(name: "aa", list_price: 20, sell_price: 10, vendor: v1)
+      p1 = FactoryBot.create(:product)
 
       cart.add_item(p1.id)
       expect(cart.items.first.product).to be_a Product
