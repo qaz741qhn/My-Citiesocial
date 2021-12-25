@@ -15,6 +15,16 @@ RSpec.describe Cart, type: :model do
       expect(cart.items.count).to eq 2
       expect(cart.items.first.quantity).to eq 3
     end
+
+    it "商品可放入購物車，也可拿出來" do
+      cart = Cart.new
+
+      v1 = Vendor.create(title: "v1")
+      p1 = Product.create(name: "aa", list_price: 20, sell_price: 10, vendor: v1)
+
+      cart.add_item(p1.id)
+      expect(cart.items.first.product).to be_a Product
+    end
   end
 
   context "進階功能" do
