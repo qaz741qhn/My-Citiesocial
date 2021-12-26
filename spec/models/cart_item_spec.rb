@@ -1,8 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe CartItem, type: :model do
+
+  let(:cart){ Cart.new }
+
   it "每個Cart Item都可以計算自己的金額" do
-    cart = Cart.new
     p1 = create(:product, sell_price: 5)
     p2 = create(:product, sell_price: 10)
     3.times { cart.add_item(p1.id) }

@@ -1,15 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Cart, type: :model do
+
+  let(:cart){ Cart.new }
+
   context "基本功能" do
     it "把商品丟到購物車裡，購物車就有東西" do
-      cart = Cart.new
       cart.add_item(2)
-      expect(cart.empty?).to eq false
+      expect(cart).to_not be_empty
     end
 
     it "加相同種類商品到購物車，購買項目不會增加，數量會改變" do
-      cart = Cart.new
       3.times {cart.add_item(1)}
       2.times {cart.add_item(2)}
       expect(cart.items.count).to eq 2
@@ -17,8 +18,6 @@ RSpec.describe Cart, type: :model do
     end
 
     it "商品可放入購物車，也可拿出來" do
-      cart = Cart.new
-
       # v1 = Vendor.create(title: "v1")
       # p1 = Product.create(name: "aa", list_price: 20, sell_price: 10, vendor: v1)
       p1 = create(:product)
@@ -28,7 +27,6 @@ RSpec.describe Cart, type: :model do
     end
 
     it "計算自己的總金額" do
-      cart = Cart.new
       p1 = create(:product, sell_price: 5)
       p2 = create(:product, sell_price: 10)
       3.times { cart.add_item(p1.id) }
@@ -40,7 +38,6 @@ RSpec.describe Cart, type: :model do
     it "聖誕節全面打九折" do
       Timecop.freeze(Time.local(2021, 12, 25))
 
-      cart = Cart.new
       p1 = create(:product, sell_price: 10)
       3.times { cart.add_item(p1.id) }
 
@@ -50,7 +47,6 @@ RSpec.describe Cart, type: :model do
 
   context "進階功能" do
     it "將購物車轉換成hash後存入session" do
-      cart = Cart.new
       p1 = create(:product)
       p2 = create(:product)
       3.times { cart.add_item(p1.id) }
