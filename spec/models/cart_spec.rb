@@ -56,14 +56,24 @@ RSpec.describe Cart, type: :model do
       3.times { cart.add_item(p1.id) }
       2.times { cart.add_item(p2.id) }
 
-      cart_hash = {
+      expect(cart.serialize).to eq cart_hash
+    end
+
+    it "將存放在session中的內容還原成購物車的hash內容" do
+      cart = Cart.from_hash(cart_hash)
+
+      expect(cart.items.first.quantity).to eq 3
+    end
+
+    private
+
+    def cart_hash
+      {
         "items" => [
           { "product_id" => 1, "quantity" => 3 },
           { "product_id" => 2, "quantity" => 2 }
         ]
       }
-
-      expect(cart.serialize).to eq cart_hash
     end
   end
 end
