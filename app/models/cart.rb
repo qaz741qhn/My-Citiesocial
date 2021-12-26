@@ -34,6 +34,10 @@ class Cart
     else
       total_price
     end
+  end
 
+  def serialize
+    items = @items.map { |item| { "product_id" => item.product_id, "quantity" => item.quantity } }
+    { "items" => items }
   end
 end

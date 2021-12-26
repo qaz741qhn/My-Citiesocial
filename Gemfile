@@ -41,6 +41,7 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 6.2'
   gem 'faker', '~> 2.19'
   gem 'timecop', '~> 0.9.4'
+  gem 'database_cleaner', '~> 2.0', '>= 2.0.1'
 end
 
 group :development do
