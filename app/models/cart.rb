@@ -19,4 +19,21 @@ class Cart
       @items << CartItem.new(product_id)
     end
   end
+
+  def total_price
+    # total = 0
+    # @items.each do |item|
+    #   total += item.total_price
+    # end
+    # total
+
+    total_price = @items.reduce(0) { |sum, item| sum + item.total_price }
+
+    if Time.now.to_date == Date.parse('Dec 25')
+      total_price * 0.9
+    else
+      total_price
+    end
+
+  end
 end
