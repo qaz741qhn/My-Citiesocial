@@ -39,10 +39,17 @@ export default class extends Controller {
         data,
         type: "POST",
         success: response => {
-          console.log(response);
+          if (response.status === 'ok') {
+            let item_count = response.items || 0
+            let evt = new CustomEvent('addToCart', { 'detail': { item_count } });
+            document.dispatchEvent(evt);
+          }
         },
         error: err => {
           console.log(err);
+        },
+        complete: () => {
+          this.addToCartButtonTarget.classList.remove("is-loading");
         }
       });
     }
