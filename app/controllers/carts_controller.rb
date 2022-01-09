@@ -9,4 +9,7 @@ class CartsController < ApplicationController
     flash[:notice] = "購物車已清空"
     redirect_to root_path
   end
+
+  def checkout
+  end
 end
